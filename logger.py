@@ -1,20 +1,9 @@
-import csv
-import datetime
-import os
+from datetime import datetime
 
-LOG_FILE = "intrusion_log.csv"
+LOG_FILE = "intrusion_log.txt"
 
 def log_intrusion():
-
-    time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-    file_exists = os.path.isfile(LOG_FILE)
-
-    with open(LOG_FILE, "a", newline="") as file:
-
-        writer = csv.writer(file)
-
-        if not file_exists:
-            writer.writerow(["Time","Event"])
-
-        writer.writerow([time,"Intrusion detected"])
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(LOG_FILE, "a") as f:
+        f.write(f"[INTRUSION DETECTED] {timestamp}\n")
+    print(f"[LOG] Intrusion logged at {timestamp}")
